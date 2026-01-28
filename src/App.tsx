@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Layout } from "@/components";
-import { HomePage, CatalogPage, TruckDetailsPage, ErrorPage } from "@/pages";
+import { HomePage, CatalogPage, TruckDetailPage, ErrorPage } from "@/pages";
 import { ROUTES } from "@/constants";
-import "./App.css";
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
       <Route path={ROUTES.HOME} element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path={ROUTES.CATALOG} element={<CatalogPage />} />
-        <Route path={ROUTES.TRUCK_DETAILS} element={<TruckDetailsPage />} />
+        <Route path={ROUTES.TRUCK_DETAILS} element={<TruckDetailPage />} />
         <Route path={ROUTES.ERROR} element={<ErrorPage />} />
         <Route path="*" element={<Navigate to={ROUTES.ERROR} replace />} />
       </Route>

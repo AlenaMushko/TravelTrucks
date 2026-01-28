@@ -1,0 +1,17 @@
+// CSS Custom Properties are injected from src/styles/utils/injectCSSVariables.ts
+
+:root {
+  --font-family: var(--typography-font-family);
+  --font-size-base: var(--typography-font-sizes-base);
+  --line-height-base: var(--typography-line-heights-normal);
+  --spacing-unit: var(--spacing-1);
+  --color-white: var(--color-background-white);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-white);
+}

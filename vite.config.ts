@@ -13,5 +13,6 @@ export default defineConfig({
       '@constants': path.resolve(__dirname, './src/constants'),
       '@controllers': path.resolve(__dirname, './src/controllers'),
     },
+    dedupe: ['react', 'react-dom'],
   },
 })
