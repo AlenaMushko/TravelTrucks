@@ -62,7 +62,25 @@ const themeOptions: ThemeOptions = {
   spacing: 4, // Base unit for MUI spacing (4px)
 
   components: {
-    // todo
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          color: colors.text.primary,
+          fontWeight: 500,
+          fontSize: typography.fontSizes.base,
+          lineHeight: typography.lineHeights.normal,
+          transition: `color ${transitions.default}`,
+          "&:hover": {
+            color: colors.accent.primaryDark,
+          },
+          "&.active": {
+            color: colors.accent.primaryDark,
+            fontWeight: 600,
+          },
+        },
+      },
+    },
   },
 };
 
