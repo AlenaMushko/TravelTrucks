@@ -13,17 +13,19 @@ interface HeroImages {
 interface HeroProps {
   images: HeroImages;
   title: string;
-  subtitle: string;
   buttonText: string;
+  subtitle?: string;
   onButtonClick?: () => void;
+  textAlign?: "left" | "center" | "right";
 }
 
 const Hero = ({
   images,
   title,
-  subtitle,
   buttonText,
+  subtitle,
   onButtonClick,
+  textAlign = "left",
 }: HeroProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -53,6 +55,7 @@ const Hero = ({
         backgroundRepeat: "no-repeat",
         display: "flex",
         alignItems: "center",
+        justifyContent: textAlign === "center" ? "center" : "flex-start",
         px: spacing[16],
       }}
     >
@@ -60,6 +63,8 @@ const Hero = ({
         sx={{
           position: "relative",
           zIndex: 2,
+          textAlign,
+          maxWidth: textAlign === "center" ? "600px" : "none",
         }}
       >
         <Typography
@@ -80,7 +85,7 @@ const Hero = ({
             mb: spacing[10],
           }}
         >
-          {subtitle}
+          {subtitle ?? ""}
         </Typography>
         <Button text={buttonText} onClick={onButtonClick} />
       </Box>
