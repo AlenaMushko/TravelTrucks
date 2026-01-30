@@ -26,8 +26,10 @@ const Button = ({
         padding: `${spacing[4]} ${spacing[16]}`,
         fontSize: typography.fontSizes.base,
         fontWeight: 500,
+        lineHeight: 1.5,
         borderRadius: borderRadius.btn,
         textTransform: "none",
+        width: "auto",
         "&:hover": {
           backgroundColor: colors.accent.primaryDark,
         },
