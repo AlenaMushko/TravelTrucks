@@ -7,7 +7,7 @@ import type {
 } from "@reduxjs/toolkit/query";
 import { startLoading, stopLoading } from "./slices/loadingSlice";
 
-const baseQueryWithAuth = fetchBaseQuery({
+const baseApiQuery = fetchBaseQuery({
   baseUrl: CONFIG.API_URL,
   prepareHeaders: (headers) => {
     headers.set("Content-Type", "application/json");
@@ -24,7 +24,7 @@ export const baseQuery: BaseQueryFn<
   api.dispatch(startLoading());
 
   try {
-    return await baseQueryWithAuth(args, api, extraOptions);
+    return await baseApiQuery(args, api, extraOptions);
   } catch (error) {
     throw error;
   } finally {

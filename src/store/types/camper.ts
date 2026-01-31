@@ -27,16 +27,14 @@ export interface GalleryImage {
 
 export interface CampersQueryParams {
   location?: string;
-  form?: string;
   AC?: boolean;
-  bathroom?: boolean;
+  automatic?: boolean;
   kitchen?: boolean;
   TV?: boolean;
-  radio?: boolean;
-  refrigerator?: boolean;
-  microwave?: boolean;
-  gas?: boolean;
-  water?: boolean;
+  bathroom?: boolean;
+  van?: boolean;
+  fullyIntegrated?: boolean;
+  alcove?: boolean;
   page?: number;
   limit?: number;
 }

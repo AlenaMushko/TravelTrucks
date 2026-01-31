@@ -24,14 +24,11 @@ export const CamperAPI = createApi({
           if (params.location && params.location.trim()) {
             searchParams.append("location", params.location);
           }
-          if (params.form && params.form.trim()) {
-            searchParams.append("form", params.form);
-          }
           if (params.AC === true) {
             searchParams.append("AC", "true");
           }
-          if (params.bathroom === true) {
-            searchParams.append("bathroom", "true");
+          if (params.automatic === true) {
+            searchParams.append("automatic", "true");
           }
           if (params.kitchen === true) {
             searchParams.append("kitchen", "true");
@@ -39,20 +36,17 @@ export const CamperAPI = createApi({
           if (params.TV === true) {
             searchParams.append("TV", "true");
           }
-          if (params.radio === true) {
-            searchParams.append("radio", "true");
+          if (params.bathroom === true) {
+            searchParams.append("bathroom", "true");
           }
-          if (params.refrigerator === true) {
-            searchParams.append("refrigerator", "true");
+          if (params.van === true) {
+            searchParams.append("van", "true");
           }
-          if (params.microwave === true) {
-            searchParams.append("microwave", "true");
+          if (params.fullyIntegrated === true) {
+            searchParams.append("fullyIntegrated", "true");
           }
-          if (params.gas === true) {
-            searchParams.append("gas", "true");
-          }
-          if (params.water === true) {
-            searchParams.append("water", "true");
+          if (params.alcove === true) {
+            searchParams.append("alcove", "true");
           }
           if (params.page !== undefined) {
             searchParams.append("page", String(params.page));
