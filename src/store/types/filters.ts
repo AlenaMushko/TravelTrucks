@@ -1,15 +1,13 @@
 export interface FiltersState {
   location: string;
-  form: string | null;
   AC: boolean;
-  bathroom: boolean;
+  automatic: boolean;
   kitchen: boolean;
   TV: boolean;
-  radio: boolean;
-  refrigerator: boolean;
-  microwave: boolean;
-  gas: boolean;
-  water: boolean;
+  bathroom: boolean;
+  van: boolean;
+  fullyIntegrated: boolean;
+  alcove: boolean;
 }
 
 export interface FilterOption {

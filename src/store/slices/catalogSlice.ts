@@ -6,6 +6,7 @@ interface CatalogState {
   trucks: CampersResponse | null;
   currentPage: number;
   filters: FiltersState;
+  searchId: number;
 }
 
 const initialState: CatalogState = {
@@ -13,17 +14,16 @@ const initialState: CatalogState = {
   currentPage: 1,
   filters: {
     location: "",
-    form: null,
     AC: false,
-    bathroom: false,
+    automatic: false,
     kitchen: false,
     TV: false,
-    radio: false,
-    refrigerator: false,
-    microwave: false,
-    gas: false,
-    water: false,
+    bathroom: false,
+    van: false,
+    fullyIntegrated: false,
+    alcove: false,
   },
+  searchId: 0,
 };
 
 const catalogSlice = createSlice({
@@ -58,11 +58,13 @@ const catalogSlice = createSlice({
       state.filters = { ...state.filters, ...action.payload };
       state.currentPage = 1;
       state.trucks = null;
+      state.searchId = Date.now();
     },
     resetFilters: (state) => {
       state.filters = initialState.filters;
       state.currentPage = 1;
       state.trucks = null;
+      state.searchId = Date.now();
     },
   },
 });

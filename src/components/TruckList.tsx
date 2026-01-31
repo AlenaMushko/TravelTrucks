@@ -1,18 +1,19 @@
-import { List } from "@mui/material";
+import { Box, List } from "@mui/material";
 
 import { useCatalog } from "@/hooks";
 import Button from "@/shared/components/Button";
 import { GradientCircularProgress } from "@/shared/components";
 import type { Camper } from "@/store/types";
-import { TruckCard } from "@/components";
+import { TruckCard, EmptyState } from "@/components";
+import { spacing } from "@/styles/tokens";
 
 const TruckList = () => {
   const { trucks, isLoading, isFetching, hasMore, onLoadMore } = useCatalog();
 
   if (isLoading) {
     return (
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -20,20 +21,26 @@ const TruckList = () => {
         }}
       >
         <GradientCircularProgress />
-      </div>
+    </Box>
+  );
+  }
+
+  if (!trucks?.total && !trucks?.items?.length) {
+    return (
+      <EmptyState
+        title="No trucks found"
+        description="We couldn't find any trucks matching your criteria. Try adjusting your filters or check back later."
+        images={{
+          mobile: "/images/not_found_1x.jpg",
+          tablet: "/images/not_found_2x.jpg",
+          desktop: "/images/not_found_3x.jpg",
+        }}
+      />
     );
   }
 
-  console.log({ trucks });
-  console.log({ isFetching });
-  console.log({ hasMore });
-
-  if (!trucks?.total && !trucks?.items?.length) {
-    return <div>No trucks found</div>;
-  }
-
   return (
-    <>
+    <Box>
       <List
         sx={{
           display: "flex",
@@ -49,15 +56,16 @@ const TruckList = () => {
       </List>
 
       {hasMore && (
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
+        <Box sx={{ mt: spacing[10], textAlign: "center" }}>
           <Button
             text={isFetching ? "Loading..." : "Load More"}
             onClick={onLoadMore}
             disabled={isFetching}
+            variant="outlined"
           />
-        </div>
+        </Box>
       )}
-    </>
+    </Box>
   );
 };
 

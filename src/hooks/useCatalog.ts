@@ -11,49 +11,47 @@ import type { CampersQueryParams } from "@/store/types/camper";
 
 const ITEMS_PER_PAGE = 4;
 
-/**
- * Хук для роботи з каталогом кемперів
- * Містить всю логіку завантаження даних, пагінації та фільтрації
- */
 export const useCatalog = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { trucks, currentPage, filters } = useSelector(
+  const { trucks, currentPage, filters, searchId } = useSelector(
     (state: RootState) => state.catalog,
   );
 
-  // Формуємо параметри запиту, виключаючи неактивні фільтри
-  const queryParams: CampersQueryParams = {
+  const queryParams: CampersQueryParams & { _searchId?: number } = {
     page: currentPage,
     limit: ITEMS_PER_PAGE,
+    _searchId: searchId,
   };
 
-  // Додаємо тільки активні фільтри
   if (filters.location && filters.location.trim()) {
     queryParams.location = filters.location;
   }
-  if (filters.form && filters.form.trim()) {
-    queryParams.form = filters.form;
+
+  if (filters.van) {
+    queryParams.form = "van";
+  } else if (filters.fullyIntegrated) {
+    queryParams.form = "fullyIntegrated";
+  } else if (filters.alcove) {
+    queryParams.form = "alcove";
   }
+
   if (filters.AC) queryParams.AC = true;
   if (filters.bathroom) queryParams.bathroom = true;
   if (filters.kitchen) queryParams.kitchen = true;
   if (filters.TV) queryParams.TV = true;
-  if (filters.radio) queryParams.radio = true;
-  if (filters.refrigerator) queryParams.refrigerator = true;
-  if (filters.microwave) queryParams.microwave = true;
-  if (filters.gas) queryParams.gas = true;
-  if (filters.water) queryParams.water = true;
 
-  const { data, isLoading, isFetching } = useGetCampersQuery(queryParams);
+  const { data, isLoading, isFetching, isError, error } = useGetCampersQuery(
+    queryParams,
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
 
-  // Оновлюємо список кемперів при отриманні нових даних
   useEffect(() => {
     if (data) {
       if (currentPage === 1) {
-        // Перше завантаження - замінюємо весь список
         dispatch(setTrucks(data));
       } else {
-        // Додаємо нові кемпери до існуючих
         dispatch(addTrucks(data));
       }
     }
@@ -68,11 +66,15 @@ export const useCatalog = () => {
       ? trucks.items.length < data.total && data.items.length === ITEMS_PER_PAGE
       : false;
 
+  const showLoader = isLoading && currentPage === 1;
+
   return {
     trucks,
     filters,
-    isLoading: isLoading && currentPage === 1,
+    isLoading: showLoader,
     isFetching,
+    isError,
+    error,
     hasMore: hasMore || false,
     onLoadMore: handleLoadMore,
   };

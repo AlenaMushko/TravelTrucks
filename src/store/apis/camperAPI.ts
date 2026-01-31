@@ -13,7 +13,10 @@ export const CamperAPI = createApi({
   baseQuery: baseQuery,
   tagTypes: ["CamperList", "CamperItem"],
   endpoints: (builder) => ({
-    getCampers: builder.query<CampersResponse, CampersQueryParams>({
+    getCampers: builder.query<
+      CampersResponse,
+      CampersQueryParams & { _searchId?: number }
+    >({
       query: (params) => {
         const searchParams = new URLSearchParams();
 

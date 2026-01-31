@@ -21,17 +21,30 @@ const Button = ({
     <MuiButton
       variant={variant}
       sx={{
-        backgroundColor: colors.accent.primary,
-        color: colors.background.white,
+        backgroundColor:
+          variant === "contained" ? colors.accent.primary : "transparent",
+        color:
+          variant === "contained"
+            ? colors.background.white
+            : colors.text.primary,
         padding: `${spacing[4]} ${spacing[16]}`,
         fontSize: typography.fontSizes.base,
         fontWeight: 500,
         lineHeight: 1.5,
         borderRadius: borderRadius.btn,
+        border:
+          variant === "outlined"
+            ? `1px solid ${colors.border.default}`
+            : "none",
         textTransform: "none",
         width: "auto",
         "&:hover": {
-          backgroundColor: colors.accent.primaryDark,
+          backgroundColor:
+            variant === "contained" ? colors.accent.primaryDark : "transparent",
+          border:
+            variant === "outlined"
+              ? `1px solid ${colors.accent.primaryDark}`
+              : "none",
         },
         ...sx,
       }}

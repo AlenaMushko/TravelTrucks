@@ -5,3 +5,4 @@ export { default as Hero } from "./Hero";
 export { default as TruckList } from "./TruckList";
 export { default as TruckFilters } from "./TruckFilters";
 export { default as TruckCard } from "./TruckCard";
+export { default as EmptyState } from "./EmptyState";

@@ -3,27 +3,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import type { Camper } from "@/store/types";
-import { Transmission, Engine } from "@/store/types";
 import { Button, FeatureChip } from "@/shared/components";
-import {
-  ACIcon,
-  AutomaticIcon,
-  GasIcon,
-  KitchenIcon,
-  LikeIcon,
-  LocationIcon,
-  MicrowaveIcon,
-  PetrolIcon,
-  RadioIcon,
-  RefrigeratorIcon,
-  ShowerIcon,
-  StarIcon,
-  TvIcon,
-  WaterIcon,
-} from "@/shared/icons";
-import { spacing, colors, borderRadius } from "@/styles/tokens";
+import { LikeIcon, LocationIcon, StarIcon } from "@/shared/icons";
 import { useFavorite } from "@/hooks";
 import { ROUTES } from "@/constants";
+import { getTruckFeatures } from "@/utils";
+import { spacing, colors, borderRadius } from "@/styles/tokens";
 
 interface TruckCardProps {
   truck: Camper;
@@ -39,88 +24,7 @@ const TruckCard: React.FC<TruckCardProps> = ({ truck }) => {
     navigate(ROUTES.TRUCK_DETAILS.replace(":id", truck.id));
   };
 
-  const getFeatures = () => {
-    const features = [];
-    if (truck.transmission === Transmission.AUTOMATIC) {
-      features.push({
-        key: "automatic",
-        label: "Automatic",
-        icon: <AutomaticIcon />,
-      });
-    }
-    if (truck.AC) {
-      features.push({
-        key: "AC",
-        label: "AC",
-        icon: <ACIcon />,
-      });
-    }
-    if (truck.engine === Engine.PETROL) {
-      features.push({
-        key: "petrol",
-        label: "Petrol",
-        icon: <PetrolIcon />,
-      });
-    }
-    if (truck.kitchen) {
-      features.push({
-        key: "kitchen",
-        label: "Kitchen",
-        icon: <KitchenIcon />,
-      });
-    }
-    if (truck.radio) {
-      features.push({
-        key: "radio",
-        label: "Radio",
-        icon: <RadioIcon />,
-      });
-    }
-    if (truck.bathroom) {
-      features.push({
-        key: "bathroom",
-        label: "Bathroom",
-        icon: <ShowerIcon />,
-      });
-    }
-    if (truck.refrigerator) {
-      features.push({
-        key: "refrigerator",
-        label: "Refrigerator",
-        icon: <RefrigeratorIcon />,
-      });
-    }
-    if (truck.TV) {
-      features.push({
-        key: "TV",
-        label: "TV",
-        icon: <TvIcon />,
-      });
-    }
-    if (truck.microwave) {
-      features.push({
-        key: "microwave",
-        label: "Microwave",
-        icon: <MicrowaveIcon />,
-      });
-    }
-    if (truck.gas) {
-      features.push({
-        key: "gas",
-        label: "Gas",
-        icon: <GasIcon />,
-      });
-    }
-    if (truck.water) {
-      features.push({
-        key: "water",
-        label: "Water",
-        icon: <WaterIcon />,
-      });
-    }
-    return features;
-  };
-  const activeFeatures = getFeatures();
+  const activeFeatures = getTruckFeatures(truck);
 
   return (
     <ListItem
