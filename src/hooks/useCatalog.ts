@@ -40,7 +40,7 @@ export const useCatalog = () => {
   if (filters.kitchen) queryParams.kitchen = true;
   if (filters.TV) queryParams.TV = true;
 
-  const { data, isLoading, isFetching, isError, error } = useGetCampersQuery(
+  const { data, isFetching, isError, error } = useGetCampersQuery(
     queryParams,
     {
       refetchOnMountOrArgChange: true,
@@ -66,12 +66,9 @@ export const useCatalog = () => {
       ? trucks.items.length < data.total && data.items.length === ITEMS_PER_PAGE
       : false;
 
-  const showLoader = isLoading && currentPage === 1;
-
   return {
     trucks,
     filters,
-    isLoading: showLoader,
     isFetching,
     isError,
     error,

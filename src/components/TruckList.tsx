@@ -1,14 +1,17 @@
 import { Box, List } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import { useCatalog } from "@/hooks";
 import Button from "@/shared/components/Button";
 import { GradientCircularProgress } from "@/shared/components";
 import type { Camper } from "@/store/types";
 import { TruckCard, EmptyState } from "@/components";
+import type { RootState } from "@/store";
 import { spacing } from "@/styles/tokens";
 
 const TruckList = () => {
-  const { trucks, isLoading, isFetching, hasMore, onLoadMore } = useCatalog();
+  const { trucks, isFetching, hasMore, onLoadMore } = useCatalog();
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
 
   if (isLoading) {
     return (
@@ -17,12 +20,14 @@ const TruckList = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          width: "100%",
+          minHeight: "400px",
           padding: "40px",
         }}
       >
         <GradientCircularProgress />
-    </Box>
-  );
+      </Box>
+    );
   }
 
   if (!trucks?.total && !trucks?.items?.length) {
