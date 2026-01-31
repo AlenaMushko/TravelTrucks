@@ -36,10 +36,18 @@ const CatalogPage = () => {
           pt: spacing[12],
           pb: spacing[14],
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          gap: { xs: spacing[10], md: spacing[18] },
+          flexDirection: "column",
+          gap: spacing[10],
           justifyContent: "space-between",
           width: "100%",
+          "@media (min-width: 1220px)": {
+            flexDirection: "row",
+            gap: spacing[8],
+            justifyContent: "center",
+          },
+          "@media (min-width: 1440px)": {
+            gap: spacing[18],
+          },
         }}
       >
         <TruckFilters />

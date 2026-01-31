@@ -15,3 +15,5 @@ export { default as PetrolIcon } from "./PetrolIcon";
 export { default as KitchenIcon } from "./KitchenIcon";
 export { default as WaterIcon } from "./WaterIcon";
 export { default as AutomaticIcon } from "./AutomaticIcon";
+export { default as FilterIcon } from "./FilterIcon";
+export { default as CloseIcon } from "./CloseIcon";

@@ -1,28 +1,20 @@
 import { useDispatch } from "react-redux";
 import { useState, useMemo, useEffect } from "react";
+import { Box, useMediaQuery } from "@mui/material";
 
 import { setFilters } from "@/store/slices/catalogSlice";
 import { useCatalog } from "@/hooks";
 import type { AppDispatch } from "@/store";
 import type { FiltersState } from "@/store/types/filters";
-import { getEquipmentFilter, getTypeFilter } from "@/utils";
-import {
-  Box,
-  Autocomplete,
-  TextField,
-  Typography,
-  InputAdornment,
-  Divider,
-} from "@mui/material";
-import { spacing, colors, borderRadius, typography } from "@/styles/tokens";
-import { FilterChip, Button } from "@/shared/components";
-import { LocationIcon } from "@/shared/icons";
 import { ukraineCities, type UkraineCity } from "@/utils/ukraineCities";
+import { FilterContent, FiltersDrawer, FiltersButton } from "./filters";
 
 const TruckFilters = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { filters: currentFilters } = useCatalog();
   const [inputValue, setInputValue] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 1220px)");
 
   const [localFilters, setLocalFilters] = useState<FiltersState>({
     location: currentFilters.location,
@@ -35,9 +27,6 @@ const TruckFilters = () => {
     fullyIntegrated: currentFilters.fullyIntegrated,
     alcove: currentFilters.alcove,
   });
-
-  const typeFilters = getTypeFilter();
-  const equipmentFilters = getEquipmentFilter();
 
   const selectedCity = useMemo(() => {
     if (!localFilters.location) return null;
@@ -95,193 +84,64 @@ const TruckFilters = () => {
 
   const handleSearch = () => {
     dispatch(setFilters(localFilters));
+    if (!isDesktop) {
+      setDrawerOpen(false);
+    }
   };
 
-  return (
-    <Box sx={{ width: "360px", flexShrink: 0 }}>
-      <Box sx={{ mb: spacing[10] }}>
-        <Typography variant="h6" component="h3">
-          Location
-        </Typography>
-        <Box sx={{ marginTop: spacing[2] }}>
-          <Autocomplete
-            fullWidth
-            options={ukraineCities}
-            getOptionLabel={(option) => `${option.name}, Ukraine`}
-            value={selectedCity}
-            onChange={handleCityChange}
-            inputValue={inputValue}
-            onInputChange={handleInputChange}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="City"
-                variant="outlined"
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                    <>
-                      <InputAdornment position="start">
-                        <LocationIcon sx={{ color: colors.text.primary }} />
-                      </InputAdornment>
-                      {params.InputProps.startAdornment}
-                    </>
-                  ),
-                }}
-                sx={{
-                  cursor: "pointer",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: borderRadius.md,
-                    backgroundColor: colors.background.tertiary,
-                    cursor: "pointer",
-                    height: "56px",
-                    padding: `${spacing[5]} ${spacing[7]}`,
-                    "& fieldset": {
-                      border: "none",
-                    },
-                  },
-                  "& .MuiInputBase-input": {
-                    cursor: "pointer",
-                    fontSize: typography.h6.fontSize,
-                    fontWeight: typography.h6.fontWeight,
-                    lineHeight: typography.h6.lineHeight,
-                  },
-                }}
-              />
-            )}
-            renderOption={(props, option) => {
-              const { key, ...otherProps } = props;
-              return (
-                <Box
-                  key={key}
-                  component="li"
-                  {...otherProps}
-                  sx={{
-                    padding: `${spacing[2]} ${spacing[4]}`,
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    component="span"
-                    sx={{ color: colors.text.primary }}
-                  >
-                    {option.name}
-                  </Typography>
-                </Box>
-              );
-            }}
-            slotProps={{
-              paper: {
-                sx: {
-                  marginTop: spacing[2],
-                },
-              },
-            }}
-            sx={{
-              "& .MuiAutocomplete-popupIndicator": {
-                color: colors.text.primary,
-              },
-            }}
-          />
-        </Box>
-      </Box>
+  const handleOpenDrawer = () => {
+    setDrawerOpen(true);
+  };
 
-      <Box sx={{ mb: spacing[10] }}>
-        <Typography variant="h6" component="h3" sx={{ mb: spacing[8] }}>
-          Filters
-        </Typography>
+  const handleCloseDrawer = () => {
+    setDrawerOpen(false);
+  };
 
-        <Box sx={{ mb: spacing[8] }}>
-          <Typography variant="h4" component="h4">
-            Vehicle equipment
-          </Typography>
-          <Divider sx={{ my: spacing[6] }} />
-          {equipmentFilters.length > 0 && (
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: spacing[3],
-              }}
-            >
-              {equipmentFilters.map((feature) => {
-                const isSelected = localFilters[
-                  feature.key as keyof FiltersState
-                ] as boolean;
-                return (
-                  <FilterChip
-                    key={feature.key}
-                    icon={feature.icon}
-                    label={feature.label}
-                    onClick={() => handleEquipmentFilterToggle(feature.key)}
-                    sx={{
-                      border: isSelected
-                        ? `1px solid ${colors.accent.primary} !important`
-                        : `1px solid ${colors.border.default} !important`,
-                      backgroundColor: `${colors.background.white} !important`,
-                      "&:hover": {
-                        backgroundColor: `${colors.background.secondary} !important`,
-                        border: `1px solid ${colors.accent.primary} !important`,
-                      },
-                    }}
-                  />
-                );
-              })}
-            </Box>
-          )}
-        </Box>
-
-        <Box sx={{ mb: spacing[8] }}>
-          <Typography variant="h4" component="h4">
-            Vehicle type
-          </Typography>
-          <Divider sx={{ my: spacing[6] }} />
-          {typeFilters.length > 0 && (
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: spacing[3],
-              }}
-            >
-              {typeFilters.map((feature) => {
-                const isSelected = localFilters[
-                  feature.key as keyof FiltersState
-                ] as boolean;
-                return (
-                  <FilterChip
-                    key={feature.key}
-                    icon={feature.icon}
-                    label={feature.label}
-                    onClick={() => handleTypeFilterToggle(feature.key)}
-                    sx={{
-                      border: isSelected
-                        ? `1px solid ${colors.accent.primary} !important`
-                        : `1px solid ${colors.border.default} !important`,
-                      backgroundColor: `${colors.background.white} !important`,
-                      "&:hover": {
-                        backgroundColor: `${colors.background.secondary} !important`,
-                        border: `1px solid ${colors.accent.primary} !important`,
-                      },
-                    }}
-                  />
-                );
-              })}
-            </Box>
-          )}
-        </Box>
-      </Box>
-
-      <Box sx={{ mt: spacing[10] }}>
-        <Button
-          text="Search"
-          onClick={handleSearch}
-          sx={{
-            width: "100%",
-            height: "56px",
-          }}
+  if (!isDesktop) {
+    return (
+      <>
+        <FiltersButton onClick={handleOpenDrawer} />
+        <FiltersDrawer
+          open={drawerOpen}
+          onClose={handleCloseDrawer}
+          localFilters={localFilters}
+          inputValue={inputValue}
+          selectedCity={selectedCity}
+          onCityChange={handleCityChange}
+          onInputChange={handleInputChange}
+          onEquipmentFilterToggle={handleEquipmentFilterToggle}
+          onTypeFilterToggle={handleTypeFilterToggle}
+          onSearch={handleSearch}
         />
-      </Box>
+      </>
+    );
+  }
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+        maxWidth: "360px",
+        flexShrink: 1,
+        minWidth: 0,
+        "@media (min-width: 1440px)": {
+          width: "360px",
+          flexShrink: 0,
+        },
+      }}
+    >
+      <FilterContent
+        localFilters={localFilters}
+        inputValue={inputValue}
+        selectedCity={selectedCity}
+        onCityChange={handleCityChange}
+        onInputChange={handleInputChange}
+        onEquipmentFilterToggle={handleEquipmentFilterToggle}
+        onTypeFilterToggle={handleTypeFilterToggle}
+        onSearch={handleSearch}
+      />
     </Box>
   );
 };
