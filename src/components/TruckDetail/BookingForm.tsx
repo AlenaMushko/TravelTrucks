@@ -10,7 +10,7 @@ const BookingForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    bookingDate: null as Date | null,
+    bookingDate: [null, null] as [Date | null, Date | null],
     comment: "",
   });
 
@@ -21,8 +21,11 @@ const BookingForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleDateChange = (date: Date | null) => {
-    setFormData((prev) => ({ ...prev, bookingDate: date }));
+  const handleDateChange = (date: Date | null | [Date | null, Date | null]) => {
+    setFormData((prev) => ({
+      ...prev,
+      bookingDate: Array.isArray(date) ? date : [date, null],
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,7 +36,7 @@ const BookingForm = () => {
     setFormData({
       name: "",
       email: "",
-      bookingDate: null,
+      bookingDate: [null, null],
       comment: "",
     });
   };
@@ -107,6 +110,7 @@ const BookingForm = () => {
           onChange={handleDateChange}
           required
           name="bookingDate"
+          selectsRange
         />
 
         <TextField
