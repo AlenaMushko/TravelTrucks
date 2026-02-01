@@ -3,7 +3,7 @@ import { Box, Drawer, Typography, IconButton } from "@mui/material";
 import type { FiltersState } from "@/store/types/filters";
 import { type UkraineCity } from "@/utils/ukraineCities";
 import { CloseIcon } from "@/shared/icons";
-import { FilterContent } from "@/components/Filters";
+import { FilterContent } from "@/components";
 import { spacing, colors, typography } from "@/styles/tokens";
 
 interface FiltersDrawerProps {
