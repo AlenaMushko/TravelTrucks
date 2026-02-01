@@ -38,6 +38,8 @@ const CatalogPage = () => {
           gap: spacing[10],
           justifyContent: "space-between",
           width: "100%",
+          maxWidth: "1440px",
+          margin: "0 auto",
           "@media (min-width: 1220px)": {
             flexDirection: "row",
             gap: spacing[8],

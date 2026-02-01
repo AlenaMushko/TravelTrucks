@@ -45,7 +45,15 @@ const TruckList = () => {
   }
 
   return (
-    <Box>
+    <Box
+      sx={{
+        flex: 1,
+        minWidth: 0,
+        "@media (min-width: 1220px)": {
+          flex: "1 1 auto",
+        },
+      }}
+    >
       <List
         sx={{
           display: "flex",
