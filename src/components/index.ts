@@ -7,8 +7,6 @@ export { default as TruckFilters } from "./TruckList/TruckFilters";
 export { default as TruckCard } from "./TruckList/TruckCard";
 export { default as EmptyState } from "./EmptyState";
 export { TruckDetail } from "./TruckDetail";
-export {
-  FilterContent,
-  FiltersDrawer,
-  FiltersButton,
-} from "./Filters";
+export { default as FilterContent } from "./Filters/FilterContent";
+export { default as FiltersDrawer } from "./Filters/FiltersDrawer";
+export { default as FiltersButton } from "./Filters/FiltersButton";
