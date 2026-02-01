@@ -1,9 +1,7 @@
 import { Box, Snackbar, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 
-import TruckList from "@/components/TruckList";
-import TruckFilters from "@/components/TruckFilters";
-import { Section } from "@/components";
+import { Section, TruckList, TruckFilters } from "@/components";
 import { useCatalog } from "@/hooks";
 import { spacing } from "@/styles/tokens";
 

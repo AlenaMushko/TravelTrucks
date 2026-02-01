@@ -7,7 +7,11 @@ import { useCatalog } from "@/hooks";
 import type { AppDispatch } from "@/store";
 import type { FiltersState } from "@/store/types/filters";
 import { ukraineCities, type UkraineCity } from "@/utils/ukraineCities";
-import { FilterContent, FiltersDrawer, FiltersButton } from "./filters";
+import {
+  FilterContent,
+  FiltersDrawer,
+  FiltersButton,
+} from "@/components/Filters";
 
 const TruckFilters = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -2,7 +2,7 @@ import { Box, Snackbar, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetCamperByIdQuery } from "@/store/apis/camperAPI";
-import { Section, Hero } from "@/components";
+import { Section, Hero, TruckDetail } from "@/components";
 import { GradientCircularProgress } from "@/shared/components";
 import { spacing } from "@/styles/tokens";
 import { ROUTES } from "@/constants";
@@ -85,22 +85,9 @@ function TruckDetailPage() {
     );
   }
 
-  console.log({ truck });
-
   return (
     <Section>
-      <Box
-        sx={{
-          pt: spacing[12],
-          pb: spacing[14],
-        }}
-      >
-        <h1>{truck.name}</h1>
-        <p>Price: ${truck.price}</p>
-        <p>Location: {truck.location}</p>
-        <p>Rating: {truck.rating}</p>
-        <p>Description: {truck.description}</p>
-      </Box>
+      <TruckDetail truck={truck} />
     </Section>
   );
 }

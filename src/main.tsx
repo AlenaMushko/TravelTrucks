@@ -10,6 +10,9 @@ import { store } from "@/store";
 import { injectCSSVariables } from "@/styles/utils/injectCSSVariables";
 import "@/styles/reset.scss";
 import "@/styles/globals.scss";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
 injectCSSVariables();
 

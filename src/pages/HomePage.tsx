@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Hero from "@/components/Hero";
+import { Hero } from "@/components";
 import { ROUTES } from "@/constants";
 
 function HomePage() {

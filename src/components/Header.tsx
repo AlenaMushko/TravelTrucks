@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Box, Link as MuiLink } from "@mui/material";
 
 import LogoIcon from "@/shared/icons/LogoIcon";
-import Section from "./Section";
+import Section from "../shared/components/Section";
 import { ROUTES } from "@/constants";
 import { colors } from "@/styles/tokens/colors";
 import { spacing } from "@/styles/tokens/spacing";
