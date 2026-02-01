@@ -19,4 +19,4 @@ export {
   LocationFilter,
   EquipmentFilters,
   TypeFilters,
-} from "./Filters";
+} from "./Filter";
