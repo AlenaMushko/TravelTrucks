@@ -1,11 +1,12 @@
 import { Box, Snackbar, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
 import { useGetCamperByIdQuery } from "@/store/apis/camperAPI";
 import { Section, Hero, TruckDetail } from "@/components";
 import { GradientCircularProgress } from "@/shared/components";
-import { spacing } from "@/styles/tokens";
 import { ROUTES } from "@/constants";
+import { spacing } from "@/styles/tokens";
 
 function TruckDetailPage() {
   const { id } = useParams<{ id: string }>();

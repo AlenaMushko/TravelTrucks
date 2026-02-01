@@ -1,8 +1,7 @@
 import { Box } from "@mui/material";
 
 import type { Camper } from "@/store/types";
-import FeaturesTab from "./FeaturesTab";
-import ReviewsTab from "./ReviewsTab";
+import { FeaturesTab, ReviewsTab } from "@/components";
 
 interface TruckDetailTabsProps {
   truck: Camper;

@@ -3,9 +3,7 @@ import { Box, Typography } from "@mui/material";
 import type { FiltersState } from "@/store/types/filters";
 import { Button } from "@/shared/components";
 import type { UkraineCity } from "@/utils/ukraineCities";
-import LocationFilter from "./LocationFilter";
-import EquipmentFilters from "./EquipmentFilters";
-import TypeFilters from "./TypeFilters";
+import { LocationFilter, EquipmentFilters, TypeFilters } from "@/components";
 import { spacing, typography } from "@/styles/tokens";
 
 interface FilterContentProps {

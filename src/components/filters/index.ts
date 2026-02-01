@@ -1,6 +1,15 @@
-export { default as LocationFilter } from "./LocationFilter";
-export { default as EquipmentFilters } from "./EquipmentFilters";
-export { default as TypeFilters } from "./TypeFilters";
-export { default as FilterContent } from "./FilterContent";
-export { default as FiltersDrawer } from "./FiltersDrawer";
-export { default as FiltersButton } from "./FiltersButton";
+import FilterContent from "./FilterContent";
+import FiltersDrawer from "./FiltersDrawer";
+import FiltersButton from "./FiltersButton";
+import LocationFilter from "./LocationFilter";
+import EquipmentFilters from "./EquipmentFilters";
+import TypeFilters from "./TypeFilters";
+
+export {
+  FilterContent,
+  FiltersDrawer,
+  FiltersButton,
+  LocationFilter,
+  EquipmentFilters,
+  TypeFilters,
+};

@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Box, Tabs, Tab } from "@mui/material";
 
 import type { Camper } from "@/store/types";
-import TruckDetailTabs from "./TruckDetailTabs";
-import BookingForm from "./BookingForm";
+import { TruckDetailTabs, BookingForm } from "@/components";
 import { spacing, colors } from "@/styles/tokens";
 
 interface TruckDetailContentProps {

@@ -4,8 +4,7 @@ import { Box, Link as MuiLink } from "@mui/material";
 import LogoIcon from "@/shared/icons/LogoIcon";
 import Section from "../shared/components/Section";
 import { ROUTES } from "@/constants";
-import { colors } from "@/styles/tokens/colors";
-import { spacing } from "@/styles/tokens/spacing";
+import { spacing, colors } from "@/styles/tokens";
 
 const Header = () => {
   return (

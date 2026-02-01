@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 import type { Camper } from "@/store/types";
 import { Slider } from "@/shared/components";
-import TruckDetailContent from "./TruckDetailContent";
+import { TruckDetailContent } from "@/components";
 import { spacing, colors } from "@/styles/tokens";
 
 interface TruckDetailProps {

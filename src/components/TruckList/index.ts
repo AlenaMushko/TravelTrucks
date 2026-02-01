@@ -1,3 +1,5 @@
-export { default as TruckList } from "./TruckList";
-export { default as TruckFilters } from "./TruckFilters";
-export { default as TruckCard } from "./TruckCard";
+import TruckList from "./TruckList";
+import TruckFilters from "./TruckFilters";
+import TruckCard from "./TruckCard";
+
+export { TruckList, TruckFilters, TruckCard };

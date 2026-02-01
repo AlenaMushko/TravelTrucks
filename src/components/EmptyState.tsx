@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
-import { colors } from "@/styles/tokens/colors";
-import { spacing } from "@/styles/tokens/spacing";
+import { spacing, colors } from "@/styles/tokens";
 
 interface EmptyStateProps {
   title?: string;

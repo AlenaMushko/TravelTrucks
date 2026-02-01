@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import { Hero } from "@/components";
 import { ROUTES } from "@/constants";
 
