@@ -11,7 +11,7 @@ import {
   FilterContent,
   FiltersDrawer,
   FiltersButton,
-} from "../Filters";
+} from "@/components";
 
 const TruckFilters = () => {
   const dispatch = useDispatch<AppDispatch>();
