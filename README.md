@@ -1,73 +1,163 @@
-# React + TypeScript + Vite
+# TravelTrucks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for campervan rental services. This application enables users to browse a catalog of available campers, filter by various criteria, add favorites, and make bookings.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home Page** - Hero section with call-to-action button
+- **Catalog** - Browse available campers with advanced filtering
+- **Filtering System** - Filter by location, vehicle type, and equipment (AC, kitchen, bathroom, etc.)
+- **Favorites** - Save favorite campers to localStorage
+- **Detailed View** - Comprehensive camper details with image gallery, reviews, and booking form
+- **Booking Form** - Validated booking form with date range selection
+- **Load More** - Paginated loading of additional campers
+- **Responsive Design** - Desktop-first design with optional mobile responsiveness
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **React 18** - UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Build tool and dev server
+- **Redux Toolkit** - State management
+- **React Router v7** - Client-side routing
+- **Material-UI (MUI)** - Component library
+- **Axios** - HTTP client
+- **React Hook Form** - Form management
+- **Swiper** - Image gallery slider
+- **Sass** - CSS preprocessing
 
-## Expanding the ESLint configuration
+## 📋 Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Before you begin, ensure you have the following installed:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Node.js** version 18 or higher
+- **npm** or **yarn** package manager
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🔧 Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd TravelTrucks
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+or
+
+```bash
+yarn install
+```
+
+## 🏃 Running the Project
+
+### Development Mode
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+yarn dev
+```
+
+The application will be available at `http://localhost:5173`
+
+### Production Build
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+or
+
+```bash
+yarn build
+```
+
+The built files will be in the `dist` directory.
+
+### Preview Production Build
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+or
+
+```bash
+yarn preview
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── Filters/        # Filter components
+│   ├── TruckDetail/    # Camper detail page components
+│   └── TruckList/      # Camper list components
+├── pages/              # Page components
+├── store/              # Redux store and slices
+│   ├── apis/          # RTK Query API definitions
+│   └── slices/        # Redux slices
+├── hooks/              # Custom React hooks
+├── shared/             # Shared components and utilities
+├── styles/             # Styles and design tokens
+├── utils/              # Utility functions
+├── constants/          # Application constants
+└── config/             # Configuration files
+```
+
+## 🌐 API Integration
+
+The application uses a mock API backend:
+
+**Base URL:** `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io`
+
+### Endpoints
+
+- `GET /campers` - Get all campers (supports filtering via query parameters)
+  - Query parameters: `location`, `form`, `AC`, `automatic`, `kitchen`, `TV`, `bathroom`, `page`, `limit`
+- `GET /campers/:id` - Get camper details by ID
+
+## ✨ Key Functionality
+
+- ✅ Home page with hero banner and navigation to catalog
+- ✅ Camper catalog with filtering capabilities
+- ✅ Multi-criteria filtering (location, vehicle type, equipment)
+- ✅ Favorites system with localStorage persistence
+- ✅ Detailed camper page with image gallery, reviews, and booking form
+- ✅ Validated booking form with success notifications
+- ✅ Paginated loading with "Load More" button
+- ✅ Opens camper details in new browser tab
+- ✅ Loading states for async operations
+- ✅ Error handling and user feedback
+
+## 📜 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## 🎨 Design System
+
+The project uses a custom design system with:
+
+- **Design Tokens** - Colors, spacing, typography, border radius
+- **Material-UI Theme** - Customized MUI theme configuration
+- **Component Library** - Reusable UI components

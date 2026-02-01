@@ -1,6 +1,5 @@
 import { ListItem, Box, Typography, IconButton } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 import type { Camper } from "@/store/types";
 import { Button, FeatureChip } from "@/shared/components";
@@ -15,13 +14,13 @@ interface TruckCardProps {
 }
 
 const TruckCard: React.FC<TruckCardProps> = ({ truck }) => {
-  const navigate = useNavigate();
   const imagesCard = truck.gallery?.[0];
   const reviewsCount = truck.reviews?.length || 0;
   const { isFavorite, toggleFavorite } = useFavorite(truck.id);
 
   const handleShowMore = () => {
-    navigate(ROUTES.TRUCK_DETAILS.replace(":id", truck.id));
+    const url = `${window.location.origin}${ROUTES.TRUCK_DETAILS.replace(":id", truck.id)}`;
+    window.open(url, "_blank");
   };
 
   const activeFeatures = getTruckFeatures(truck);
