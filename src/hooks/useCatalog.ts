@@ -28,11 +28,11 @@ export const useCatalog = () => {
   }
 
   if (filters.van) {
-    queryParams.form = "van";
+    queryParams.van = true;
   } else if (filters.fullyIntegrated) {
-    queryParams.form = "fullyIntegrated";
+    queryParams.fullyIntegrated = true;
   } else if (filters.alcove) {
-    queryParams.form = "alcove";
+    queryParams.alcove = true;
   }
 
   if (filters.AC) queryParams.AC = true;

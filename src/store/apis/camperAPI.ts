@@ -70,7 +70,7 @@ export const CamperAPI = createApi({
         url: API_ROUTES.CAMPERS.GET_BY_ID(id),
         method: "GET",
       }),
-      providesTags: (result, error, { id }) => [{ type: "CamperItem", id }],
+      providesTags: (_result, _error, { id }) => [{ type: "CamperItem", id }],
     }),
   }),
 });
