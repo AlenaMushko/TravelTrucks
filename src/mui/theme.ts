@@ -81,6 +81,49 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            backgroundColor: colors.background.tertiary,
+            borderRadius: borderRadius.md,
+            "& fieldset": {
+              border: "none",
+            },
+            "&:hover fieldset": {
+              border: "none",
+            },
+            "&.Mui-focused fieldset": {
+              border: "none",
+            },
+          },
+          "& .MuiInputBase-input": {
+            padding: `${spacing[5]} !important`,
+            fontSize: typography.fontSizes.base,
+            fontWeight: typography.fontWeights.regular,
+            lineHeight: typography.lineHeights.normal,
+            color: colors.text.primary,
+            "&::placeholder": {
+              color: colors.text.tertiary,
+              opacity: 1,
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: colors.text.tertiary,
+            "&.Mui-focused": {
+              color: colors.text.tertiary,
+            },
+            "&.MuiInputLabel-shrink": {
+              color: colors.text.tertiary,
+            },
+          },
+          "& .MuiInputLabel-root.MuiInputLabel-shrink + .MuiInputBase-root .MuiInputBase-input":
+            {
+              color: colors.text.primary,
+            },
+        },
+      },
+    },
   },
 };
 

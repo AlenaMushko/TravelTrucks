@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { CamperAPI } from "./apis/camperAPI";
 import catalogReducer from "./slices/catalogSlice";
 import loadingReducer from "./slices/loadingSlice";
+import notificationReducer from "./slices/notificationSlice";
 
 export const store = configureStore({
   reducer: {
     [CamperAPI.reducerPath]: CamperAPI.reducer,
     catalog: catalogReducer,
     loading: loadingReducer,
+    notification: notificationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(CamperAPI.middleware),

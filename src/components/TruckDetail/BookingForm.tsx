@@ -1,28 +1,41 @@
 import { useState } from "react";
 import { Box, TextField, Typography } from "@mui/material";
 
-import { Button } from "@/shared/components";
-import { spacing, colors, borderRadius, typography } from "@/styles/tokens";
+import { Button, DatePicker } from "@/shared/components";
+import { useNotification } from "@/hooks";
+import { spacing, colors, borderRadius, getSpacing } from "@/styles/tokens";
 
 const BookingForm = () => {
+  const { showSuccess } = useNotification();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    bookingDate: "",
+    bookingDate: null as Date | null,
     comment: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleDateChange = (date: Date | null) => {
+    setFormData((prev) => ({ ...prev, bookingDate: date }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement booking submission logic
+
     console.log("Booking submitted:", formData);
+    showSuccess("Form submitted successfully!");
+    setFormData({
+      name: "",
+      email: "",
+      bookingDate: null,
+      comment: "",
+    });
   };
 
   return (
@@ -31,149 +44,89 @@ const BookingForm = () => {
       onSubmit={handleSubmit}
       sx={{
         backgroundColor: colors.background.white,
-        borderRadius: borderRadius.lg,
-        padding: spacing[6],
-        boxShadow: "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06)",
+        borderRadius: borderRadius.xs,
+        padding: spacing[11],
+        border: `1px solid ${colors.border.default}`,
         display: "flex",
         flexDirection: "column",
-        gap: spacing[6],
         height: "fit-content",
       }}
     >
       <Box>
         <Typography
-          variant="h3"
-          component="h2"
+          variant="h4"
+          component="h4"
           sx={{
-            mb: spacing[2],
-            fontWeight: typography.fontWeights.semibold,
-            fontSize: typography.fontSizes["2xl"],
-            lineHeight: typography.lineHeights.tight,
+            mb: spacing[1],
           }}
         >
           Book your campervan now
         </Typography>
         <Typography
-          variant="body1"
+          variant="h6"
+          component="h5"
           sx={{
-            color: colors.text.secondary,
-            fontSize: typography.fontSizes.base,
-            lineHeight: typography.lineHeights.normal,
+            color: colors.text.tertiary,
+            mb: spacing[6],
           }}
         >
           Stay connected! We are always ready to help you.
         </Typography>
       </Box>
 
-      <TextField
-        name="name"
-        label="Name"
-        required
-        value={formData.name}
-        onChange={handleChange}
-        fullWidth
+      <Box
         sx={{
-          "& .MuiOutlinedInput-root": {
-            backgroundColor: colors.background.secondary,
-            borderRadius: borderRadius.md,
-            "& fieldset": {
-              borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-              borderColor: "transparent",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: colors.accent.primary,
-            },
-          },
+          display: "flex",
+          flexDirection: "column",
+          gap: getSpacing(14),
+          mb: getSpacing(14),
         }}
-      />
+      >
+        <TextField
+          name="name"
+          label="Name"
+          required
+          value={formData.name}
+          onChange={handleChange}
+          fullWidth
+        />
 
-      <TextField
-        name="email"
-        label="Email"
-        type="email"
-        required
-        value={formData.email}
-        onChange={handleChange}
-        fullWidth
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            backgroundColor: colors.background.secondary,
-            borderRadius: borderRadius.md,
-            "& fieldset": {
-              borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-              borderColor: "transparent",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: colors.accent.primary,
-            },
-          },
-        }}
-      />
+        <TextField
+          name="email"
+          label="Email"
+          type="email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+          fullWidth
+        />
 
-      <TextField
-        name="bookingDate"
-        label="Booking date"
-        type="date"
-        required
-        value={formData.bookingDate}
-        onChange={handleChange}
-        fullWidth
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            backgroundColor: colors.background.secondary,
-            borderRadius: borderRadius.md,
-            "& fieldset": {
-              borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-              borderColor: "transparent",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: colors.accent.primary,
-            },
-          },
-        }}
-      />
+        <DatePicker
+          label="Booking date"
+          value={formData.bookingDate}
+          onChange={handleDateChange}
+          required
+          name="bookingDate"
+        />
 
-      <TextField
-        name="comment"
-        label="Comment"
-        multiline
-        rows={4}
-        value={formData.comment}
-        onChange={handleChange}
-        fullWidth
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            backgroundColor: colors.background.secondary,
-            borderRadius: borderRadius.md,
-            "& fieldset": {
-              borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-              borderColor: "transparent",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: colors.accent.primary,
-            },
-          },
-        }}
-      />
+        <TextField
+          name="comment"
+          label="Comment"
+          multiline
+          rows={1}
+          value={formData.comment}
+          onChange={handleChange}
+          fullWidth
+        />
+      </Box>
 
       <Button
         text="Send"
         type="submit"
         variant="contained"
         sx={{
-          mt: spacing[2],
-          width: "100%",
+          width: "fit-content",
+          alignSelf: "center",
         }}
       />
     </Box>

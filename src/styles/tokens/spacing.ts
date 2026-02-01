@@ -10,6 +10,7 @@ export const spacing = {
   8: "2rem", // 32px
   9: "1.75rem", // 28px
   10: "2.5rem", // 40px
+  11: "2.75rem", // 44px
   12: "3rem", // 48px
   14: "3.25rem", // 52px
   16: "3.75rem", // 60px
@@ -18,14 +19,8 @@ export const spacing = {
   24: "6rem", // 96px
 } as const;
 
-export const getSpacing = (multiplier: number): string => {
-  if (multiplier === 0) return "0";
-
-  if (multiplier in spacing) {
-    return spacing[multiplier as keyof typeof spacing];
-  }
-
-  return `${multiplier * 0.25}rem`;
+export const getSpacing = (pixels: number): string => {
+  return `${pixels / 16}rem`;
 };
 
 export type Spacing = typeof spacing;
