@@ -2,7 +2,7 @@ import { Box, Typography, Avatar } from "@mui/material";
 
 import type { Review } from "@/store/types";
 import { StarIcon } from "@/shared/icons";
-import { spacing, colors, borderRadius, typography } from "@/styles/tokens";
+import { spacing, colors, typography } from "@/styles/tokens";
 
 interface ReviewsTabProps {
   reviews: Review[];
@@ -10,12 +10,7 @@ interface ReviewsTabProps {
 
 const ReviewsTab: React.FC<ReviewsTabProps> = ({ reviews }) => {
   const getInitials = (name: string): string => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+    return name.charAt(0).toUpperCase();
   };
 
   const renderStars = (rating: number) => {
@@ -38,16 +33,13 @@ const ReviewsTab: React.FC<ReviewsTabProps> = ({ reviews }) => {
     return (
       <Box
         sx={{
-          backgroundColor: colors.background.white,
-          borderRadius: borderRadius.lg,
           padding: spacing[6],
-          boxShadow: "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06)",
         }}
       >
         <Typography
-          variant="body1"
+          variant="h5"
+          component="h5"
           sx={{
-            color: colors.text.secondary,
             textAlign: "center",
           }}
         >
@@ -61,74 +53,61 @@ const ReviewsTab: React.FC<ReviewsTabProps> = ({ reviews }) => {
     <Box
       sx={{
         backgroundColor: colors.background.white,
-        borderRadius: borderRadius.lg,
-        padding: spacing[6],
-        boxShadow: "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06)",
         display: "flex",
         flexDirection: "column",
-        gap: spacing[6],
+        gap: spacing[11],
       }}
     >
       {reviews.map((review, index) => (
-        <Box
-          key={index}
-          sx={{
-            display: "flex",
-            gap: spacing[4],
-            "&:not(:last-child)": {
-              paddingBottom: spacing[6],
-              borderBottom: `1px solid ${colors.border.default}`,
-            },
-          }}
-        >
-          <Avatar
+        <Box key={index}>
+          <Box
             sx={{
-              backgroundColor: colors.background.secondary,
-              color: colors.accent.primary,
-              width: 60,
-              height: 60,
-              fontSize: typography.fontSizes.xl,
-              fontWeight: typography.fontWeights.semibold,
+              display: "flex",
+              gap: spacing[4],
+              alignItems: "center",
+              mb: spacing[4],
             }}
           >
-            {getInitials(review.reviewer_name)}
-          </Avatar>
-
-          <Box sx={{ flex: 1 }}>
-            <Typography
-              variant="h6"
-              component="h4"
+            <Avatar
               sx={{
-                mb: spacing[2],
+                backgroundColor: colors.background.secondary,
+                color: colors.accent.primary,
+                width: spacing[16],
+                height: spacing[16],
+                fontSize: typography.fontSizes["2xl"],
                 fontWeight: typography.fontWeights.semibold,
-                fontSize: typography.fontSizes.base,
-                lineHeight: typography.lineHeights.tight,
               }}
             >
-              {review.reviewer_name}
-            </Typography>
+              {getInitials(review.reviewer_name)}
+            </Avatar>
 
             <Box
-              sx={{
-                display: "flex",
-                gap: spacing[1],
-                mb: spacing[2],
-              }}
+              sx={{ display: "flex", flexDirection: "column", gap: spacing[1] }}
             >
-              {renderStars(review.reviewer_rating)}
-            </Box>
+              <Typography variant="h5" component="h5">
+                {review.reviewer_name}
+              </Typography>
 
-            <Typography
-              variant="body1"
-              sx={{
-                color: colors.text.primary,
-                fontSize: typography.fontSizes.base,
-                lineHeight: typography.lineHeights.normal,
-              }}
-            >
-              {review.comment}
-            </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: spacing[1],
+                }}
+              >
+                {renderStars(review.reviewer_rating)}
+              </Box>
+            </Box>
           </Box>
+
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{
+              color: colors.text.secondary,
+            }}
+          >
+            {review.comment}
+          </Typography>
         </Box>
       ))}
     </Box>

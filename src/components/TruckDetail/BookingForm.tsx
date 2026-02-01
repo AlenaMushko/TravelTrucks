@@ -36,9 +36,7 @@ const BookingForm = () => {
 
   const bookingDate = watch("bookingDate");
 
-  const handleDateChange = (
-    date: Date | null | [Date | null, Date | null],
-  ) => {
+  const handleDateChange = (date: Date | null | [Date | null, Date | null]) => {
     const newDate: [Date | null, Date | null] = Array.isArray(date)
       ? (date as [Date | null, Date | null])
       : [date, null];

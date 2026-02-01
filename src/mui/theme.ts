@@ -5,7 +5,6 @@ import { spacing } from "@/styles/tokens/spacing";
 import { borderRadius } from "@/styles/tokens/borderRadius";
 import { transitions } from "@/styles/tokens/transitions";
 
-// Custom theme options
 const themeOptions: ThemeOptions = {
   palette: {
     primary: {
@@ -42,7 +41,7 @@ const themeOptions: ThemeOptions = {
   },
 
   shape: {
-    borderRadius: 8, // 0.5rem = 8px //todo
+    borderRadius: 8,
   },
 
   transitions: {
@@ -59,7 +58,7 @@ const themeOptions: ThemeOptions = {
     },
   },
 
-  spacing: 4, // Base unit for MUI spacing (4px)
+  spacing: 4,
 
   components: {
     MuiLink: {
@@ -77,6 +76,39 @@ const themeOptions: ThemeOptions = {
           "&.active": {
             color: colors.accent.primaryDark,
             fontWeight: 600,
+          },
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontSize: typography.fontSizes.xl,
+          fontWeight: typography.fontWeights.semibold,
+          color: colors.text.primary,
+          position: "relative",
+          paddingBottom: spacing[6],
+          "&.Mui-selected": {
+            color: colors.text.primary,
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "5px",
+              backgroundColor: colors.accent.primary,
+            },
+          },
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "5px",
+            backgroundColor: "transparent",
           },
         },
       },

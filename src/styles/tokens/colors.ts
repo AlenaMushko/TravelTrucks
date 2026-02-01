@@ -15,6 +15,7 @@ const colorValues = {
     white: "#ffffff",
     secondary: "#f2f4f7",
     tertiary: "#f7f7f7",
+    quaternary: "rgba(247, 247, 247, 0.6)",
   },
 
   border: {

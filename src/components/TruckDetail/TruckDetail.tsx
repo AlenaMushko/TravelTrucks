@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { LocationIcon, StarIcon } from "@/shared/icons";
 import { Box, Typography } from "@mui/material";
 
 import type { Camper } from "@/store/types";
 import { Slider } from "@/shared/components";
-import TruckDetailTabs from "./TruckDetailTabs";
-import BookingForm from "./BookingForm";
+import TruckDetailContent from "./TruckDetailContent";
 import { spacing, colors } from "@/styles/tokens";
 
 interface TruckDetailProps {
@@ -13,12 +11,7 @@ interface TruckDetailProps {
 }
 
 const TruckDetail: React.FC<TruckDetailProps> = ({ truck }) => {
-  const [tabValue, setTabValue] = useState(0);
   const reviewsCount = truck.reviews?.length || 0;
-
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
 
   return (
     <Box
@@ -95,43 +88,7 @@ const TruckDetail: React.FC<TruckDetailProps> = ({ truck }) => {
         {truck.description}
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: spacing[10],
-          "@media (min-width: 1100px)": {
-            flexDirection: "row",
-          },
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            "@media (min-width: 1100px)": {
-              flex: 1,
-              minWidth: 0,
-            },
-          }}
-        >
-          <TruckDetailTabs
-            truck={truck}
-            value={tabValue}
-            onChange={handleTabChange}
-          />
-        </Box>
-        <Box
-          sx={{
-            width: "100%",
-            "@media (min-width: 1100px)": {
-              width: "641px",
-              flexShrink: 0,
-            },
-          }}
-        >
-          <BookingForm />
-        </Box>
-      </Box>
+      <TruckDetailContent truck={truck} />
     </Box>
   );
 };

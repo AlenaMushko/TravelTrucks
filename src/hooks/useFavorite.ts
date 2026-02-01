@@ -9,8 +9,8 @@ const getFavoritesFromStorage = (): Set<string> => {
       const favorites = JSON.parse(stored);
       return new Set(Array.isArray(favorites) ? favorites : []);
     }
-  } catch (error) {
-    console.error("Error reading favorites from localStorage:", error);
+  } catch {
+    return new Set<string>();
   }
   return new Set<string>();
 };
@@ -21,8 +21,8 @@ const saveFavoritesToStorage = (favorites: Set<string>): void => {
       FAVORITES_STORAGE_KEY,
       JSON.stringify(Array.from(favorites)),
     );
-  } catch (error) {
-    console.error("Error saving favorites to localStorage:", error);
+  } catch {
+    // Silently fail if localStorage is unavailable
   }
 };
 
