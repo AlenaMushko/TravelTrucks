@@ -9,3 +9,13 @@ export type { TypeFilter } from "./getTypeFilter";
 
 export { ukraineCities, searchCities } from "./ukraineCities";
 export type { UkraineCity } from "./ukraineCities";
+
+export {
+  EMAIL_REGEX,
+  VALIDATION_MESSAGES,
+  validateBookingForm,
+  validateName,
+  validateEmail,
+  validateBookingDate,
+} from "./validation";
+export type { BookingFormValues } from "./validation";
